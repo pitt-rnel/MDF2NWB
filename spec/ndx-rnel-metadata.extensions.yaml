@@ -1,0 +1,45 @@
+groups:
+- neurodata_type_def: GrantExtension
+  neurodata_type_inc: LabMetaData
+  doc: type for storing grant information
+  attributes:
+  - name: investigators # combine grant.pi and grant.coi
+    dtype: text
+    doc: investigator information
+    required: false
+  - name: url # grant.URL
+    dtype: text
+    doc: grant url
+    required: false
+  - name: project_number # grant.projectNumber
+    dtype: text
+    doc: grant name
+    required: false
+  - name: title # grant.officialName
+    dtype: text
+    doc: grant name
+    required: false
+  - name: alt_names # grant.alternativeNames, grant.name, grant.description.name
+    dtype: text
+    doc: alternative names
+    required: false
+  - name: acknowledgements # grant.description.acknowledgements
+    dtype: text
+    doc: acknowledgements
+    required: false
+  - name: additional_links # grant.description.additional_links
+    dtype: text
+    doc: additional links
+    required: false
+  - name: funding # grant.description.funding
+    dtype: text
+    doc: funding information
+    required: false
+  - name: start_date # grant.startDate
+    dtype: text
+    doc: grant start date
+    required: false
+  - name: end_date # grant.endDate
+    dtype: text
+    doc: grant end date
+    required: false
