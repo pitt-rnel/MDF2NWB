@@ -1,1 +1,3 @@
 *.nwb
++types/
+spec/
