@@ -38,6 +38,10 @@ if ~isempty(fieldNames)
                 attrs(i).dtype = 'numeric';
             elseif isa(fieldValue, 'cell')
                 attrs(i).dtype = 'text';
+            elseif isa(fieldValue, 'logical')
+                attrs(i).dtype = 'bool';
+            else
+                error(['Unsupported data type for field name ' fieldName]) 
             end
         end
     end
