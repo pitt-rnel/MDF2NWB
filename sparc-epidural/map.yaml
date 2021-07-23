@@ -1,0 +1,36 @@
+description:
+  filename: sparc-epidural-alexanderkeith
+map:
+  - name: NwbFile
+    type: types.core.NWBFile
+    properties:
+      session_description: $lambda mdfObj -> mdfObj.curatedGrant.dataset_description.description
+      identifier: $lambda mdfObj -> mdfObj.subjects(1).curatedSubject.subjectUuid
+      session_start_time: $lambda mdfObj -> datetime(mdfObj.subjects(1).trials(1).absoluteStartTime, 'InputFormat', 'yyyy-MM-dd''T''HH:mm:ss,SSSSSSSSSXXX', 'TimeZone', 'America/New_York'),
+      general_session_id: $lambda mdfObj -> mdfObj.subjects(1).curatedSubject.subjectUuid
+      general_institution: $lambda mdfObj -> 'University of Pittsburgh'
+      general_lab: $lambda mdfObj -> 'Research Neural Engineering Lab'
+      general_experiment_description: $lambda mdfObj -> mdfObj.curatedGrant.dataset_description.description
+      general_notes: $lambda mdfObj -> mdfObj.subjects(1).curation.fixes.stim_pulse_width_anode.notes
+      general_protocol: $lambda mdfObj -> ['IACUC ' mdfObj.subjects(1).IACUC]
+      general_keywords: $lambda mdfObj -> strjoin(mdfObj.curatedGrant.dataset_description.keywords, ', ')
+      general_extracellular_ephys_electrodes: $lambda mdfObj -> mapElectrodeTable(mdfObj)
+  - name: types.core.Subject
+    type: types.core.Subject
+    properties:
+      subject_id: $lambda mdfObj -> num2str(mdfObj.subjects(1).subjectId)
+      age: $lambda mdfObj -> [num2str(mdfObj.subjects(1).age) ' ' mdfObj.subjects(1).age_units]
+      date_of_birth: $lambda mdfObj -> datetime(mdfObj.subjects(1).dob)
+      weight: $lambda mdfObj -> [num2str(mdfObj.subjects(1).weight) ' ' mdfObj.subjects(1).weight_units]
+      description: $lambda mdfObj -> [mdfObj.subjects(1).name ', ' mdfObj.subjects(1).name ' ' ]
+      species: $lambda mdfObj -> 'Cat'
+      sex: $lambda mdfObj -> mdfObj.subjects(1).sex
+  - name: types.ndx_rnel.GrantMetaData
+    type: types.core.LabMetaData
+    property: general
+    func: mapGrantMetaData
+  - name: types.ndx_rnel.ElectricalStimSeries
+    type: types.core.TimeSeries
+    property: acquisition
+    func: mapTimeSeries      
+    iterations: 5
