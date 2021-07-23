@@ -1,0 +1,12 @@
+namespaces:
+- author: [Tyler Madonna]
+  contact: [tjm159@pitt.edu]
+  doc: extensions for storing sparc epidural metadata and data
+  name: ndx-rnel
+  schema:
+  - namespace: core
+    neurodata_types:
+    - LabMetaData
+    - DynamicTable
+  - source: ndx-rnel-sparc-epidural.yaml
+  version: 0.1.0

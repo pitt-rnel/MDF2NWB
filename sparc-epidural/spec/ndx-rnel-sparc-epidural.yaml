@@ -1,0 +1,93 @@
+groups:
+- neurodata_type_def: GrantMetaData
+  neurodata_type_inc: LabMetaData
+  doc: type for storing curated grant meta data
+  attributes:
+  - name: project_number # projectNumber
+    dtype: text
+    doc: project number
+    required: false
+  - name: fullname # fullname
+    dtype: text
+    doc: full name of project
+    required: false
+  - name: sparc_award_number # submission.sparc_award_number
+    dtype: text
+    doc: sparc award number
+    required: false
+  - name: milestone_completion_date # submission.milestone_completion_date
+    dtype: text
+    doc: milestone completion date
+    required: false
+  - name: milestone_achieved # submission.milestone_achieved
+    dtype: text
+    doc: milestone achieved
+    required: false
+  - name: description # dataset_description.description
+    dtype: text
+    doc: description
+    required: false
+  - name: subtitle # dataset_description.subtitle
+    dtype: text
+    doc: subtitle
+    required: false
+  - name: number_of_subjects # dataset_description.number_of_subjects
+    dtype: int
+    doc: number of subjects in grant
+    required: false
+  - name: protocol_url # dataset_description.protocol_url
+    dtype: text
+    doc: protocol url
+    required: false
+  - name: protocol_title # dataset_description.protocol_title
+    dtype: text
+    doc: protocol title
+    required: false
+  - name: funding # dataset_description.funding
+    dtype: text
+    doc: grant funding
+    required: false
+  - name: keywords # dataset_description.keywords
+    dtype: text
+    doc: keywords
+    required: false
+  - name: name # dataset_description.name
+    dtype: text
+    doc: grant name
+    required: false
+  - name: grant_uuid # grantUuid
+    dtype: text
+    doc: grant unique identifier
+    required: false
+  groups:
+  - name: contributors
+    neurodata_type_inc: ContributorsTable
+    doc: grant contributors
+- neurodata_type_def: ContributorsTable
+  neurodata_type_inc: DynamicTable
+  doc: type for storing grant contributors
+- neurodata_type_def: ElectricalStimSeries
+  neurodata_type_inc: ElectricalSeries
+  doc: type for storing electrical series with associated stim times
+  attributes:
+  - name: comments
+    dtype: text
+    doc: comments associated to the series
+    required: false
+  - name: stim_location
+    dtype: text
+    doc: location of the stimulation
+    required: false 
+  - name: stim_description
+    dtype: text
+    doc: description of the stimulation
+    required: false 
+  datasets:
+  - name: stim_times
+    dtype: numeric
+    dims:
+    - - num_times
+    shape:
+    - - null
+    doc: recorded stim time data
+    required: false 
