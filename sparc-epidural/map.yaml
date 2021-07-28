@@ -23,7 +23,7 @@ map:
       date_of_birth: $lambda mdfObj -> datetime(mdfObj.subjects(1).dob)
       weight: $lambda mdfObj -> [num2str(mdfObj.subjects(1).weight) ' ' mdfObj.subjects(1).weight_units]
       description: $lambda mdfObj -> [mdfObj.subjects(1).name ', ' mdfObj.subjects(1).name ' ' ]
-      species: $lambda mdfObj -> 'Cat'
+      species: $lambda mdfObj -> mdfObj.subjects(1).curatedSubject.curated.metadata.species
       sex: $lambda mdfObj -> mdfObj.subjects(1).sex
   - name: types.ndx_rnel.GrantMetaData
     type: types.core.LabMetaData
