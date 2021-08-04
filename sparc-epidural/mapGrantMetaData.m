@@ -29,17 +29,13 @@ function [name, metadata] = mapGrantMetaData(grant, ~)
     contributorsTable.description = 'contributors to the grant';
     contributorsTable.id = types.hdmf_common.ElementIdentifiers('data', 1:contribLength);
         
-    for i = 1:contribLength
+    for i = 1:length(contributorsTable.colnames)
+        colName = contributorsTable.colnames{i};
+        
         vdata = types.hdmf_common.VectorData;
-        vdata.description = ['Contributor ' num2str(i)];
-        vdata.data = { ...
-            contributors(i).contributor_name, ...
-            strjoin(contributors(i).contributor_affiliation, '; '), ...
-            num2str(contributors(i).is_contact_person), ...
-            strjoin(contributors(i).contributor_role, '; '), ...
-            contributors(i).contributor_orcid_id ...
-            };
-        contributorsTable.vectordata.set(['Contributor ' num2str(i)], vdata);
+        vdata.description = colName;
+        vdata.data = {contributors(:).contributor_name};
+        contributorsTable.vectordata.set(colName, vdata);
     end
     
     metadata.contributors = contributorsTable;
