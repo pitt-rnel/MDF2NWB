@@ -61,11 +61,30 @@ groups:
     required: false
   groups:
   - name: contributors
-    neurodata_type_inc: ContributorsTable
-    doc: grant contributors
-- neurodata_type_def: ContributorsTable
-  neurodata_type_inc: DynamicTable
-  doc: type for storing grant contributors
+    neurodata_type_inc: DynamicTable
+    doc: contributors to the grant
+    quantity: '?'
+    datasets:
+    - name: contributor_name
+      neurodata_type_inc: VectorData
+      dtype: text
+      doc: name of the contributor
+    - name: contributor_affiliation
+      neurodata_type_inc: VectorData
+      dtype: text
+      doc: affiliation of the contributor   
+    - name: is_contact_person
+      neurodata_type_inc: VectorData
+      dtype: bool
+      doc: affiliation of the contributor      
+    - name: contributor_role
+      neurodata_type_inc: VectorData
+      dtype: text
+      doc: role of the contributor  
+    - name: contributor_orcid_id
+      neurodata_type_inc: VectorData
+      dtype: text
+      doc: orcid id of the contributor  
 - neurodata_type_def: ElectricalStimSeries
   neurodata_type_inc: ElectricalSeries
   doc: type for storing electrical series with associated stim times

@@ -24,51 +24,22 @@ function [name, metadata] = mapGrantMetaData(grant, ~)
     contributors = curatedGrant.dataset_description.contributors;
     contribLength = length(contributors);
     
-    contributorsTable = types.ndx_rnel.ContributorsTable;
-    contributorsTable.colnames = {'contributor_name', 'contributor_affiliation', 'is_contact_person', 'contributor_role', 'contributor_orcid_id'};
-    contributorsTable.description = 'contributors to the grant';
-    contributorsTable.id = types.hdmf_common.ElementIdentifiers('data', 1:contribLength);
-        
-    for i = 1:length(contributorsTable.colnames)
-        colName = contributorsTable.colnames{i};
-        
-        vdata = types.hdmf_common.VectorData;
-        vdata.description = colName;
-        vdata.data = {contributors(:).contributor_name};
-        contributorsTable.vectordata.set(colName, vdata);
+    colNames = {'contributor_name', 'contributor_affiliation', 'is_contact_person', 'contributor_role', 'contributor_orcid_id'};
+    contribTable = cell2table(cell(0, length(colNames)), 'VariableNames', colNames);
+    
+    for i = 1:contribLength
+        contribRow = { ...
+            contributors(i).contributor_name, ...
+            strjoin(contributors(i).contributor_affiliation, '; '), ...
+            num2str(contributors(i).is_contact_person), ...
+            strjoin(contributors(i).contributor_role, '; '), ...
+            contributors(i).contributor_orcid_id ...
+            };
+        contribTable = [contribTable; contribRow];
     end
     
-    metadata.contributors = contributorsTable;
+    metadata.contributors = util.table2nwb(contribTable, 'contributors to the grant');
     
-    
-    
-%     contribLength = length(contributors);
-%     contribStruct = struct( ...
-%             'contributor_name', cell(1, contribLength), ...
-%             'contributor_affiliation', cell(1, contribLength), ...
-%             'is_contact_person', cell(1, contribLength), ...
-%             'contributor_role', cell(1, contribLength), ...
-%             'contributor_orcid_id', cell(1, contribLength) ...
-%     );
-%     
-%     for i = 1:length(contributors)
-%         contribStruct(i) = struct( ...
-%             'contributor_name', contributors(i).contributor_name, ...
-%             'contributor_affiliation', strjoin(contributors(i).contributor_affiliation, '; '), ...
-%             'is_contact_person', contributors(i).is_contact_person, ...
-%             'contributor_role', strjoin(contributors(i).contributor_role, '; '), ...
-%             'contributor_orcid_id', contributors(i).contributor_orcid_id ...
-%         );
-%     end
-    
-%     metadata.contributors = struct2table(contribStruct);
-
-%         contributorsTable(i).contributor_name = contributors(i).contributor_name;
-%         contributorsTable(i).contributor_affiliation = strjoin(contributors(i).contributor_affiliation, '; ');
-%         contributorsTable(i).is_contact_person = contributors(i).is_contact_person;
-%         contributorsTable(i).contributor_role = strjoin(contributors(i).contributor_role, '; ');
-%         contributorsTable(i).contributor_orcid_id = contributors(i).contributor_orcid_id;
-                               
     name = 'GrantMetaData';
 end
 
