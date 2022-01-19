@@ -1,4 +1,14 @@
 function outStruct = dynamicTableToStruct(dt)
+% dynamicTableToStruct Converts NWB dynamic table to a matlab struct
+%
+% Converts NWB dynamic table to the MDF compatible matlab struct
+% 
+% Args:
+%   dt: NWB dynamic table
+%
+% Returns:
+%   outStruct: The created MDF struct
+%
 
 outStruct = struct('description', dt.description);
 

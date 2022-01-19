@@ -1,4 +1,17 @@
 function nwbFile = exportToNWB(mdfObj, configFile)
+% exportToNWB Converts a MDF root object to a NWB file
+%
+% Converts a MDF root object to a NWBfile object using a configuration
+% file. The resulting NWB file is store in the current directory.
+%
+% Args:
+%   mdfObj: Root MDF object
+%   configFile: Path to the configuration file
+% 
+% Returns:
+%   nwbFile: The created NWB file object (also saved in the current
+%            directory)
+%
 
 try
     configStruct = ReadYaml(configFile);

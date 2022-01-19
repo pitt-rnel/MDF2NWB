@@ -1,6 +1,22 @@
 function [name, series] = mapTimeSeries(grant, iterNum)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+% mapTimeSeries Maps MDF sparc epidural data to NWB extension 
+% ElectricalStimSeries
+%
+% Maps MDF sparc epidural data to NWB extension ElectricalStimSeries. This 
+% is an example of the function mapping format.
+% 
+% Args:
+%   grant: MDF grant object
+%   iterNum: The current number of times this function has been called
+%            by the map function
+%
+% Returns:
+%   name: The unique name that is used by the main mapping function to
+%         identify the ElectricalStimSeries from other ElectricalStimSeries 
+%         types (Trial 1, Trial 2, etc...)
+%   series: The created ElectricalStimSeries NWB extension object that is 
+%           stored in the NWBfile object
+%
 
 elecParams = {'id', 'location'};
 elecTbl = cell2table(cell(0, length(elecParams)), 'VariableNames', elecParams);

@@ -1,6 +1,22 @@
 function [name, metadata] = mapGrantMetaData(grant, ~)
-%mapGrantMetaData Function for mapping MDF bladder grant metadata to NWB GrantMetaData
-%   Detailed explanation goes here
+% mapGrantMetaData Maps MDF sparc epidural grant metadata to NWB extension 
+% GrantMetaData
+%
+% Maps MDF sparc epidural grant metadata to NWB extension GrantMetaData. 
+% This is an example of the function mapping format.
+% 
+% Args:
+%   grant: MDF grant object
+%   iterNum: The current number of times this function has been called
+%            by the main mapping function (not used since there's only one
+%            GrantMetaData object in the NWB file).
+%
+% Returns:
+%   name: The unique name that is used by the main mapping function to
+%         identify the GrantMetaData from other GrantMetaData types
+%   metadata: The created GrantMetaData NWB extension object that is stored 
+%             in the NWBfile object
+%
 
     curatedGrant = grant.curatedGrant;
 

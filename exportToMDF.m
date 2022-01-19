@@ -1,4 +1,16 @@
 function nwbMdfObj = exportToMDF(nwbObj, fileLocation)
+% exportToMDF Converts a NWB file object to a MDF object
+%
+% Converts a NWB file object to a MDF object with fields and children
+% cooresponding to the NWB file fields
+%
+% Args:
+%   nwbObj: NWB file object
+%   fileLocation: Location where MDF will store data files
+% 
+% Returns:
+%   nwbMdfObj: The created MDF object
+%
 
 nwbType = class(nwbObj);
 nwbMdfObj = mdfObj(nwbType);

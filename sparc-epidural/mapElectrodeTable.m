@@ -1,4 +1,14 @@
 function table = mapElectrodeTable(grant)
+% mapElectrodeTable Maps the MDF grant object to a NWB electrode table
+%
+% Maps the MDF grant object to a NWB electrode table
+%
+% Args:
+%   grant: MDF grant object
+% 
+% Returns:
+%   table: Created NWB electrode table
+%
 
 elecParams = {'id', 'location'};
 elecTbl = cell2table(cell(0, length(elecParams)), 'VariableNames', elecParams);

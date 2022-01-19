@@ -1,4 +1,13 @@
 function nwbMdfObj = nwbObjToMDFObj(nwbObj)
+% nwbObjToMDFObj Converts a NWB object to a MDF object
+%
+% Converts a NWB object to a MDF compatible matlab equivalent
+% Args:
+%   nwbObj: NWB object to be converted
+%
+% Returns:
+%   nwbMdfObj: The created MDF object
+%
 
 nwbType = class(nwbObj);
 nwbMdfObj = mdfObj(nwbType);
